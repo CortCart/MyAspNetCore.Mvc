@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Photo.Model
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link" href="/add.html">Create</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/shopping-cart.html">Shopping Cart</a>
+    </li>
+   
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity"  asp-page="/Account/Register" >Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity"  asp-page="/Account/Login" >Login</a>
+    </li>
+}
+</ul>
