@@ -2,11 +2,10 @@
 
 namespace Photo.Controllers
 {
-    public class ItemsController : Controller
+    public class CamerasController : Controller
     {
         public IActionResult All()
         {
-            var 
             return View();
         }
     }

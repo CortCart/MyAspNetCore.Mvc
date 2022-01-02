@@ -1,13 +1,17 @@
-﻿namespace CarRentingSystem.Services.Items.Models;
+﻿namespace Photo.Services.Items.Models;
 
 public class CamerasQueryServiceModel
 {
-    public string Name { get; set; }
+    public int Id { get; init; }
+    public string Brand { get; set; }
 
-    public string Price { get; set; }
+    public string Model { get; set; }
+
+    public decimal Price { get; set; }
+
+    public string Img { get; set; }
 
     public double Rating { get; set; }
 
-    public string Img { get; set; }
 
 }

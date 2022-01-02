@@ -16,6 +16,9 @@ namespace Photo.Data
 
         public DbSet<Photograph> Photographs { get; set; }
 
+        public DbSet<Camera> Cameras { get; set; }
+
+        public DbSet<Dealer> Dealers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
