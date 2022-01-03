@@ -1,0 +1,22 @@
+﻿@using Photo.Infrastructure.Extensions
+@model IEnumerable<Photo.Services.Cameras.Models.CamerasServiceModel>
+
+<div class="row">
+    @foreach (var camera in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img class="card-img-top" src="@camera.Img" alt="@camera.Brand @camera.Model">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center"> @camera.Brand @camera.Model </h5>
+                    <a asp-controller="Cameras" asp-action="Details" asp-route-id="@camera.Id" asp-route-information="" class="btn btn-primary">View</a>
+                    @if (ViewBag.AllowCarEdit == true || User.IsAdmin())
+                    {
+                        <a asp-controller="Cameras" asp-action="Edit" asp-route-id="@camera.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Cameras" asp-action="Delete" asp-route-id="@camera.Id" class="btn btn-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
