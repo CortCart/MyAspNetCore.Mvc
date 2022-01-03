@@ -12,8 +12,8 @@ using Photo.Data;
 namespace Photo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220103191009_Photo")]
-    partial class Photo
+    [Migration("20220101165301_Photos")]
+    partial class Photos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,77 +161,6 @@ namespace Photo.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Photo.Model.Camera", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DealerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Img")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("Public")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DealerId");
-
-                    b.ToTable("Cameras");
-                });
-
-            modelBuilder.Entity("Photo.Model.Dealer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Dealers");
-                });
-
             modelBuilder.Entity("Photo.Model.Photograph", b =>
                 {
                     b.Property<int>("Id")
@@ -368,22 +297,6 @@ namespace Photo.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Photo.Model.Camera", b =>
-                {
-                    b.HasOne("Photo.Model.Dealer", "Dealer")
-                        .WithMany("Cameras")
-                        .HasForeignKey("DealerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Dealer");
-                });
-
-            modelBuilder.Entity("Photo.Model.Dealer", b =>
-                {
-                    b.Navigation("Cameras");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,80 +1,32 @@
-﻿using AutoMapper.QueryableExtensions;
-using Photo.Data;
+﻿using Photo.Data;
 using Photo.Model;
-using Photo.Models.Cars;
+using Photo.Services.Items;
+using Photo.Services.Items.Models;
 
-using AutoMapper;
-using Photo.Services.Cameras.Models;
-
-namespace Photo.Services.Items;
+namespace CarRentingSystem.Services.Items;
 
 public class CamerasService:ICamerasServices
 {
     private  ApplicationDbContext _context;
 
-
-    public CamerasService(ApplicationDbContext context, IMapper mapper)
+    public CamerasService(ApplicationDbContext context)
     {
         _context=context;
     }
 
-    public CamerasQueryServiceModel All(
-        string brand = null,
-        string searchTerm = null,
-        CamerasSorting sorting = CamerasSorting.DateCreated,
-        int currentPage = 1,
-        int carsPerPage = int.MaxValue,
-        bool publicOnly = true)
+    public IEnumerable<CamerasQueryServiceModel> All()
     {
-        var camersQuery = this._context.Cameras
-            .Where(c =>  c.Public);
-
-        if (!string.IsNullOrWhiteSpace(brand))
+        return _context.Cameras.Select(x => new CamerasQueryServiceModel
         {
-            camersQuery = camersQuery.Where(c => c.Brand == brand);
-        }
-
-        // Where(c => c.Brand == brand);
-        //.Where(c => !publicOnly || c.IsPublic);
-
-
-        if (!string.IsNullOrWhiteSpace(searchTerm))
-        {
-            camersQuery = camersQuery.Where(c =>
-                (c.Brand + " " + c.Model).ToLower().Contains(searchTerm.ToLower()) ||
-                c.Description.ToLower().Contains(searchTerm.ToLower()));
-        }
-
-        camersQuery = sorting switch
-        {
-            CamerasSorting.Year => camersQuery.OrderByDescending(c => c.Year),
-            CamerasSorting.BrandAndModel => camersQuery.OrderBy(c => c.Brand).ThenBy(c => c.Model),
-            CamerasSorting.DateCreated or _ => camersQuery.OrderByDescending(c => c.Id)
-        };
-
-        var totalCars = camersQuery.Count();
-
-        var cameras = GetCameras(camersQuery
-            .Skip((currentPage - 1) * carsPerPage)
-            .Take(carsPerPage));
-
-        return new CamerasQueryServiceModel
-        {
-            TotalCars = totalCars,
-            CurrentPage = currentPage,
-            CarsPerPage = carsPerPage,
-            Cameras = cameras
-        };
+            Id = x.Id,
+            Brand = x.Brand,
+            Model = x.Model,
+            Img = x.Img,
+            Price = x.Price,
+            Rating = x.Rating
+        }).ToHashSet();
     }
 
-
-    public IEnumerable<string> AllBrands()
-        => this._context
-            .Cameras
-            .Select(c => c.Brand)
-            .Distinct()
-            .OrderBy(br => br)
-            .ToList();
     public CameraDetailsServiceModel Details(int cameraId)
     {
         return _context.Cameras.Where(x => x.Id == cameraId)
@@ -131,15 +83,4 @@ public class CamerasService:ICamerasServices
         _context.SaveChanges();
         return true;
     }
-    private IEnumerable<CamerasServiceModel> GetCameras(IQueryable<Camera> carQuery)
-        => carQuery
-            .Select(x => new CamerasServiceModel
-            {
-                Id = x.Id,
-                Brand = x.Brand,
-                Img = x.Img,
-                Model = x.Model,
-                Price = x.Price,
-                Rating = x.Rating
-            }).ToList();
 }

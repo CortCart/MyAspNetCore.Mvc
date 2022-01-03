@@ -1,13 +1,17 @@
-﻿namespace Photo.Services.Cameras.Models;
+﻿namespace Photo.Services.Items.Models;
 
 public class CamerasQueryServiceModel
 {
-    public int CurrentPage { get; set; }
+    public int Id { get; init; }
+    public string Brand { get; set; }
 
-    public int CarsPerPage { get; set; }
+    public string Model { get; set; }
 
-    public int TotalCars { get; set; }
+    public decimal Price { get; set; }
 
-    public IEnumerable<CamerasServiceModel> Cameras { get; set; }
+    public string Img { get; set; }
+
+    public double Rating { get; set; }
+
 
 }

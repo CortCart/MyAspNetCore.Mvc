@@ -1,4 +1,4 @@
-﻿namespace Photo.Services.Cameras.Models;
+﻿namespace Photo.Services.Items.Models;
 
 public class CameraDetailsServiceModel
 {
