@@ -1,4 +1,4 @@
-﻿namespace CarRentingSystem.Infrastructure.Extensions
+﻿namespace Photo.Infrastructure.Extensions
 {
     using System.Security.Claims;
 

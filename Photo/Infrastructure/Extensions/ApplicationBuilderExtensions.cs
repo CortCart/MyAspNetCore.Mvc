@@ -1,7 +1,7 @@
 ﻿using Photo.Data;
 using Photo.Model;
 
-namespace CarRentingSystem.Infrastructure.Extensions
+namespace Photo.Infrastructure.Extensions
 {
     using System;
     using System.Linq;
@@ -28,10 +28,10 @@ namespace CarRentingSystem.Infrastructure.Extensions
             return app;
         }
 
+        //must fix
         private static void MigrateDatabase(IServiceProvider services)
         {
             var data = services.GetRequiredService<ApplicationDbContext>();
-
             data.Database.Migrate();
         }
 

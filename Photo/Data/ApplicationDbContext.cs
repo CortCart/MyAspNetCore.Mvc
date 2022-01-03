@@ -22,6 +22,13 @@ namespace Photo.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder
+                .Entity<Camera>()
+                .HasOne(c => c.Dealer)
+                .WithMany(c => c.Cameras)
+                .HasForeignKey(c => c.DealerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
     }

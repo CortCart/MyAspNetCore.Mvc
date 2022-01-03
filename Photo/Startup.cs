@@ -1,8 +1,9 @@
-using CarRentingSystem.Infrastructure.Extensions;
 using Photo.Data;
+using Photo.Infrastructure.Extensions;
 using Photo.Model;
+using Photo.Services.Items;
 
-namespace CarRentingSystem
+namespace Photo
 {
   
     using Microsoft.AspNetCore.Builder;
@@ -27,7 +28,7 @@ namespace CarRentingSystem
                 .AddDbContext<ApplicationDbContext>(options => options
                     .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
             
-          //  services.AddDatabaseDeveloperPageExceptionFilter();
+          // services.AddDatabaseDeveloperPageExceptionFilter();
 
             services
                 .AddDefaultIdentity<User>(options =>
@@ -40,7 +41,7 @@ namespace CarRentingSystem
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddAutoMapper(typeof(Startup));
+          services.AddAutoMapper(typeof(Startup));
 
             services.AddMemoryCache();
 
@@ -48,6 +49,9 @@ namespace CarRentingSystem
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
+
+            services.AddTransient<ICamerasServices, CamerasService>();
+
 
         }
 

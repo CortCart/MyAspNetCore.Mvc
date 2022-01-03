@@ -1,3 +1,5 @@
+using Photo;
+
 namespace CarRentingSystem
 {
     using Microsoft.AspNetCore.Hosting;
