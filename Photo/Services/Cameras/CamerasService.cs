@@ -6,7 +6,7 @@ using Photo.Models.Cars;
 using AutoMapper;
 using Photo.Services.Cameras.Models;
 
-namespace Photo.Services.Items;
+namespace Photo.Services.Cameras;
 
 public class CamerasService:ICamerasServices
 {

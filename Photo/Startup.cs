@@ -1,7 +1,8 @@
 using Photo.Data;
 using Photo.Infrastructure.Extensions;
 using Photo.Model;
-using Photo.Services.Items;
+using Photo.Services.Cameras;
+using Photo.Services.Dealers;
 
 namespace Photo
 {
@@ -51,6 +52,7 @@ namespace Photo
             });
 
             services.AddTransient<ICamerasServices, CamerasService>();
+            services.AddTransient<IDealerService, DealerService>();
 
 
         }

@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Dealers\" />
     <Folder Include="Models\Users\" />
+    <Folder Include="Services\Dealers\" />
   </ItemGroup>
 
 </Project>

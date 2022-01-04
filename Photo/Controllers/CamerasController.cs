@@ -1,17 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Photo.Infrastructure.Extensions;
+using Photo.Model;
 using Photo.Models.Cars;
-using Photo.Services.Items;
+using Photo.Services.Cameras;
+using Photo.Services.Dealers;
 
 namespace Photo.Controllers
 {
     public class CamerasController : Controller
     {
         private  ICamerasServices camerasServices;
+        private  IDealerService dealersServices;
 
-        public CamerasController( ICamerasServices cameras)
+        public CamerasController( ICamerasServices cameras, IDealerService dealer)
         {
             this.camerasServices = cameras;
+            this.dealersServices = dealer;
         }
+        
         public IActionResult All([FromQuery] AllCarmerasQueryModel   query)
         {
             var queryResult = this.camerasServices.All(
@@ -29,5 +36,35 @@ namespace Photo.Controllers
 
             return View(query);
         }
+        [Authorize]
+        public IActionResult Add()
+        {
+            if (!this.dealersServices.IsDealer(this.User.Id()))
+            {
+                return RedirectToAction(nameof(DealersController.Become), "Dealers");
+
+            }
+            return this.View();
+        }
+
+            [HttpPost]
+            [Authorize]
+            public IActionResult Add(CameraFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+              //  ModelState.AddModelError("cv", "Invalid data attempt.");
+            }
+
+                int id = this.camerasServices.Create(model.Brand, model.Model, model.Price, model.Description,
+                    model.Img, model.Year, dealersServices.IdByUser(this.User.Id()));
+                
+            return RedirectToAction(nameof(Details), new { id = id });
+        }
+
+            public IActionResult Details( int id)
+            {
+                return this.View();
+            }
     }
 }

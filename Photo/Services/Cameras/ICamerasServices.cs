@@ -2,7 +2,7 @@
 using Photo.Models.Cars;
 using Photo.Services.Cameras.Models;
 
-namespace Photo.Services.Items;
+namespace Photo.Services.Cameras;
 
 public interface ICamerasServices
 {

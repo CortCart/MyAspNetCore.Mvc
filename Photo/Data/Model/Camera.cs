@@ -16,7 +16,7 @@ public class Camera
     public bool Public { get; set; }=true;
 
 
-    public double Rating { get; set; }
+    public double Rating { get; set; } = 0;
 
     public string Img { get; set; }
 
