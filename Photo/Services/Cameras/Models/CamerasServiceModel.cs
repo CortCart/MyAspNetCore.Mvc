@@ -13,5 +13,6 @@ public class CamerasServiceModel
 
     public double Rating { get; set; }
 
+    public string Descripton { get; set; }
 
 }

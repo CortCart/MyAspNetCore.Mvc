@@ -140,6 +140,7 @@ public class CamerasService:ICamerasServices
                 Img = x.Img,
                 ModelCamera = x.Model,
                 Price = x.Price,
+                Descripton = x.Description,
                 Rating = x.Rating
             }).ToList();
 }
