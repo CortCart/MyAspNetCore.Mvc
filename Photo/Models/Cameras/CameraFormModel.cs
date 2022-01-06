@@ -3,7 +3,7 @@
 public class CameraFormModel
 {
     public string Brand { get; set; }
-    public string Model { get; set; }
+    public string ModelCamera { get; set; }
     public decimal Price { get; set; }
     public string Img { get; set; }
     public int Year { get; set; }

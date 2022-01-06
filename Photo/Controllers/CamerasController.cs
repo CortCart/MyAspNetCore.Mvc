@@ -48,7 +48,7 @@ namespace Photo.Controllers
         }
 
             [HttpPost]
-            [Authorize]
+           // [Authorize]
             public IActionResult Add(CameraFormModel model)
         {
             if (!ModelState.IsValid)
@@ -56,10 +56,11 @@ namespace Photo.Controllers
               //  ModelState.AddModelError("cv", "Invalid data attempt.");
             }
 
-                int id = this.camerasServices.Create(model.Brand, model.Model, model.Price, model.Description,
+                int id = this.camerasServices.Create(model.Brand, model.ModelCamera, model.Price, model.Description,
                     model.Img, model.Year, dealersServices.IdByUser(this.User.Id()));
-                
-            return RedirectToAction(nameof(Details), new { id = id });
+
+              return  this.Redirect("/");
+                //    return RedirectToAction(nameof(Details), new { id = id });
         }
 
             public IActionResult Details( int id)

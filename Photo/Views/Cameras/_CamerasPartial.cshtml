@@ -6,9 +6,9 @@
     {
         <div class="col-md-4">
             <div class="card mb-3">
-                <img class="card-img-top" src="@camera.Img" alt="@camera.Brand @camera.Model">
+                <img class="card-img-top" src="@camera.Img" alt="@camera.Brand @camera.ModelCamera">
                 <div class="card-body text-center">
-                    <h5 class="card-title text-center"> @camera.Brand @camera.Model </h5>
+                    <h5 class="card-title text-center"> @camera.Brand @camera.ModelCamera </h5>
                     <a asp-controller="Cameras" asp-action="Details" asp-route-id="@camera.Id" asp-route-information="" class="btn btn-primary">View</a>
                     @if (ViewBag.AllowCarEdit == true || User.IsAdmin())
                     {

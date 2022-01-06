@@ -82,7 +82,7 @@ public class CamerasService:ICamerasServices
             {
                 Id = x.Id,
                 Brand = x.Brand,
-                Model = x.Model,
+                ModelCamera = x.Model,
                 Price = x.Price,
                 Rating = x.Rating,
                 Img = x.Img,
@@ -93,12 +93,12 @@ public class CamerasService:ICamerasServices
             .FirstOrDefault();
     }
 
-    public int Create(string brand, string model, decimal price, string description, string imageUrl, int year, int dealerId)
+    public int Create(string brand, string modelCamera, decimal price, string description, string imageUrl, int year, int dealerId)
     {
        var camera = new Camera()
        {
            Brand = brand,
-           Model = model,
+           Model = modelCamera,
            Price = price,
            Rating = 0,
            Year = year,
@@ -138,7 +138,7 @@ public class CamerasService:ICamerasServices
                 Id = x.Id,
                 Brand = x.Brand,
                 Img = x.Img,
-                Model = x.Model,
+                ModelCamera = x.Model,
                 Price = x.Price,
                 Rating = x.Rating
             }).ToList();
