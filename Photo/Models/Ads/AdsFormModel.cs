@@ -1,6 +1,6 @@
-﻿namespace Photo.Models.Cameras;
+﻿namespace Photo.Models.Ads;
 
-public class CameraFormModel
+public class AdsFormModel
 {
     public string Brand { get; set; }
     public string ModelCamera { get; set; }

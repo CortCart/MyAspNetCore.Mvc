@@ -2,20 +2,20 @@
 @model IEnumerable<Photo.Services.Cameras.Models.CamerasServiceModel>
 
 <div class="row">
-<div data-reflow-type="product-list" data-reflow-order="date_desc">
+    <div data-reflow-type="product-list" data-reflow-order="date_desc">
 
-    @foreach (var camera in Model)
-    {
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <img class="card-img-top" src="@camera.Img" >
-                <div class="card-body text-center">
-                    <h5 class="card-title text-center">@camera.Brand- @camera.ModelCamera </h5>
-                    <a asp-controller="Cameras" asp-action="Details" asp-route-id="@camera.Id"  class="btn btn-primary">View</a>
+        @foreach (var camera in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="@camera.Img" >
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-center">@camera.Brand- @camera.ModelCamera </h5>
+                        <a asp-controller="Cameras" asp-action="Details" asp-route-id="@camera.Id"  class="btn btn-primary">View</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
 
 </div>

@@ -1,21 +1,21 @@
 ﻿using AutoMapper.QueryableExtensions;
 using Photo.Data;
 using Photo.Model;
-using Photo.Models.Cars;
 
 using AutoMapper;
+using Photo.Models.Cameras;
 using Photo.Services.Cameras.Models;
 
 namespace Photo.Services.Cameras;
 
-public class CamerasService:ICamerasServices
+public class CamerasService : ICamerasServices
 {
-    private  ApplicationDbContext _context;
+    private ApplicationDbContext _context;
 
 
     public CamerasService(ApplicationDbContext context, IMapper mapper)
     {
-        _context=context;
+        _context = context;
     }
 
     public CamerasQueryServiceModel All(
@@ -23,11 +23,11 @@ public class CamerasService:ICamerasServices
         string searchTerm = null,
         CamerasSorting sorting = CamerasSorting.DateCreated,
         int currentPage = 1,
-        int carsPerPage = int.MaxValue,
+        int camerasPerPage = int.MaxValue,
         bool publicOnly = true)
     {
         var camersQuery = this._context.Cameras
-            .Where(c =>  c.Public);
+            .Where(c => c.Public);
 
         if (!string.IsNullOrWhiteSpace(brand))
         {
@@ -52,17 +52,17 @@ public class CamerasService:ICamerasServices
             CamerasSorting.DateCreated or _ => camersQuery.OrderByDescending(c => c.Id)
         };
 
-        var totalCars = camersQuery.Count();
+        var totalCameras = camersQuery.Count();
 
         var cameras = GetCameras(camersQuery
-            .Skip((currentPage - 1) * carsPerPage)
-            .Take(carsPerPage));
+            .Skip((currentPage - 1) * camerasPerPage)
+            .Take(camerasPerPage));
 
         return new CamerasQueryServiceModel
         {
-            TotalCars = totalCars,
+            TotalCameras = totalCameras,
             CurrentPage = currentPage,
-            CarsPerPage = carsPerPage,
+            CarsPerPage = camerasPerPage,
             Cameras = cameras
         };
     }
@@ -95,24 +95,24 @@ public class CamerasService:ICamerasServices
 
     public int Create(string brand, string modelCamera, decimal price, string description, string imageUrl, int year, int dealerId)
     {
-       var camera = new Camera()
-       {
-           Brand = brand,
-           Model = modelCamera,
-           Price = price,
-           Rating = 0,
-           Year = year,
-           Img = imageUrl,
-           Description = description,
-           DealerId = dealerId
-       };
+        var camera = new Camera()
+        {
+            Brand = brand,
+            Model = modelCamera,
+            Price = price,
+            Rating = 0,
+            Year = year,
+            Img = imageUrl,
+            Description = description,
+            DealerId = dealerId
+        };
 
         _context.Cameras.Add(camera);
         _context.SaveChanges();
         return camera.Id;
     }
 
-    public bool Edit(int id ,string brand, string model, decimal price, string description, string imageUrl, int year, double rating)
+    public bool Edit(int id, string brand, string model, decimal price, string description, string imageUrl, int year, double rating)
     {
         var camera = _context.Cameras.Find(id);
 

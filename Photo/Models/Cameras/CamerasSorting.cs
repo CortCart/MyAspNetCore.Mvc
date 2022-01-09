@@ -1,4 +1,4 @@
-﻿namespace Photo.Models.Cars;
+﻿namespace Photo.Models.Cameras;
 
 public enum CamerasSorting
 {

@@ -6,7 +6,7 @@ public class CamerasQueryServiceModel
 
     public int CarsPerPage { get; set; }
 
-    public int TotalCars { get; set; }
+    public int TotalCameras { get; set; }
 
     public IEnumerable<CamerasServiceModel> Cameras { get; set; }
 

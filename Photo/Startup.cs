@@ -28,7 +28,7 @@ namespace Photo
             services
                 .AddDbContext<ApplicationDbContext>(options => options
                     .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<ICamerasServices, CamerasService>();
+            services.AddTransient<ICamerasServices,CamerasService>();
             services.AddTransient<IDealerService, DealerService>();
             services.AddTransient<ApplicationDbContext>();
             // services.AddDatabaseDeveloperPageExceptionFilter();

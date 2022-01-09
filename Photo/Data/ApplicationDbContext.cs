@@ -18,6 +18,8 @@ namespace Photo.Data
 
         public DbSet<Camera> Cameras { get; set; }
 
+        public DbSet<Ad> Ads { get; set; }
+
         public DbSet<Dealer> Dealers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

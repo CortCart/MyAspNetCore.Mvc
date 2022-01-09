@@ -1,6 +1,6 @@
 ﻿using Photo.Services.Cameras.Models;
 
-namespace Photo.Models.Cars
+namespace Photo.Models.Cameras
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
