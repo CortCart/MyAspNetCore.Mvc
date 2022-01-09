@@ -28,16 +28,19 @@ namespace Photo
             services
                 .AddDbContext<ApplicationDbContext>(options => options
                     .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
-            
-          // services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddTransient<ICamerasServices, CamerasService>();
+            services.AddTransient<IDealerService, DealerService>();
+            services.AddTransient<ApplicationDbContext>();
+            // services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddScoped<DealerService>();
 
             services
                 .AddDefaultIdentity<User>(options =>
                 {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -51,8 +54,7 @@ namespace Photo
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
-            services.AddTransient<ICamerasServices, CamerasService>();
-            services.AddTransient<IDealerService, DealerService>();
+            
 
 
         }

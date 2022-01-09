@@ -1,17 +1,32 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Photo.Data
+@using Photo.Infrastructure.Extensions
 @using Photo.Model
+@using Photo.Services.Dealers
 
+@inject ApplicationDbContext context;
+@inject DealerService dealer
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    if (!dealer.IsDealer(this.User.Id()))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Dealers" asp-action="Become" >Become a dealer</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link"asp-controller="Cameras" asp-action="Add">Create</a>
+        </li>  
+    }
+    
     <li class="nav-item">
-        <a class="nav-link" href="/add.html">Create</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/shopping-cart.html">Shopping Cart</a>
+        <a class="nav-link" >My profile</a>
     </li>
    
 }
@@ -24,4 +39,5 @@ else
         <a class="nav-link" asp-area="Identity"  asp-page="/Account/Login" >Login</a>
     </li>
 }
+
 </ul>
