@@ -1,6 +1,7 @@
 using Photo.Data;
 using Photo.Infrastructure.Extensions;
 using Photo.Model;
+using Photo.Services.Ads;
 using Photo.Services.Cameras;
 using Photo.Services.Dealers;
 
@@ -30,6 +31,7 @@ namespace Photo
                     .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ICamerasServices,CamerasService>();
             services.AddTransient<IDealerService, DealerService>();
+            services.AddTransient<IAdsServices, AdsService>();
             services.AddTransient<ApplicationDbContext>();
             // services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddScoped<DealerService>();

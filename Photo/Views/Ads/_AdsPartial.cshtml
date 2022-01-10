@@ -1,0 +1,21 @@
+﻿@using Photo.Infrastructure.Extensions
+@model IEnumerable<Photo.Services.Ads.Models.AdsServiceModel>
+
+<div class="row">
+    <div data-reflow-type="product-list" data-reflow-order="date_desc">
+
+        @foreach (var ads in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-center">@ads.Head- @ads.Author </h5>
+                        <h5 class="card-title text-center">@ads.Descripton</h5>
+                        <a asp-controller="Ads" asp-action="Details" asp-route-id="@ads.Id"  class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

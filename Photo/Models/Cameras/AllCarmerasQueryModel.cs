@@ -18,7 +18,7 @@ namespace Photo.Models.Cameras
 
         public int CurrentPage { get; set; } = 1;
 
-        public int TotalCars { get; set; }
+        public int TotalCameras { get; set; }
 
         public IEnumerable<string> Brands { get; set; }
 

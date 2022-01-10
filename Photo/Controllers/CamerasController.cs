@@ -31,7 +31,7 @@ namespace Photo.Controllers
             var carBrands = this.camerasServices.AllBrands();
 
             query.Brands = carBrands;
-            query.TotalCars = queryResult.TotalCameras;
+            query.TotalCameras = queryResult.TotalCameras;
             query.Cameras = queryResult.Cameras;
 
             return View(query);

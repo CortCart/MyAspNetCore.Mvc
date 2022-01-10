@@ -7,7 +7,7 @@ public class AdsQueryServiceModel
 
     public int CarsPerPage { get; set; }
 
-    public int TotalCars { get; set; }
+    public int TotalAds { get; set; }
 
-    public IEnumerable<AdsServiceModel> Cameras { get; set; }
+    public IEnumerable<AdsServiceModel> Ads { get; set; }
 }

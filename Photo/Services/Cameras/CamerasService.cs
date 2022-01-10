@@ -54,7 +54,7 @@ public class CamerasService : ICamerasServices
 
         var totalCameras = camersQuery.Count();
 
-        var cameras = GetCameras(camersQuery
+        var cameras= GetCameras(camersQuery
             .Skip((currentPage - 1) * camerasPerPage)
             .Take(camerasPerPage));
 
@@ -131,8 +131,8 @@ public class CamerasService : ICamerasServices
         _context.SaveChanges();
         return true;
     }
-    private IEnumerable<CamerasServiceModel> GetCameras(IQueryable<Camera> carQuery)
-        => carQuery
+    private IEnumerable<CamerasServiceModel> GetCameras(IQueryable<Camera> cameraQuery)
+        => cameraQuery
             .Select(x => new CamerasServiceModel
             {
                 Id = x.Id,
