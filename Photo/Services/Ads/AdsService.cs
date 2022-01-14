@@ -40,7 +40,7 @@ public class AdsService:IAdsServices
         {
             TotalAds  = totalAds,
             CurrentPage = currentPage,
-            CarsPerPage = adsPerPage,
+            AdsPerPage = adsPerPage,
             Ads = ads
         };
     }

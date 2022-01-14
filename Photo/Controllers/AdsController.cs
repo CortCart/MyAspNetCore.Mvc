@@ -19,7 +19,9 @@ namespace Photo.Controllers
                 query.CurrentPage,
                 AllAdsQueryModel.AdsPerPage);
 
-            return View();
+            query.Ads = queryResult.Ads;
+            query.TotalAds = queryResult.TotalAds;
+            return View(query);
         }
     }
 }
