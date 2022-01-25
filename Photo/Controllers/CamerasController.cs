@@ -5,6 +5,7 @@ using Photo.Model;
 using Photo.Models.Cameras;
 using Photo.Services.Cameras;
 using Photo.Services.Dealers;
+using Photo.Services.Images;
 
 namespace Photo.Controllers
 {
@@ -12,11 +13,13 @@ namespace Photo.Controllers
     {
         private ICamerasServices camerasServices;
         private IDealerService dealersServices;
+        private IImageService imageService;
 
-        public CamerasController(ICamerasServices cameras, IDealerService dealer)
+        public CamerasController(ICamerasServices cameras, IDealerService dealer, IImageService images)
         {
             this.camerasServices = cameras;
             this.dealersServices = dealer;
+            this.imageService = images;
         }
 
         public IActionResult All([FromQuery] AllCarmerasQueryModel query)
@@ -49,23 +52,42 @@ namespace Photo.Controllers
 
         [HttpPost]
         // [Authorize]
-        public IActionResult Add(CameraFormModel model)
+        public  IActionResult Add(CameraFormModel model)
         {
             if (!ModelState.IsValid)
             {
-                //  ModelState.AddModelError("cv", "Invalid data attempt.");
+                  ModelState.AddModelError("cv", "Invalid data attempt.");
             }
 
-            int id = this.camerasServices.Create(model.Brand, model.ModelCamera, model.Price, model.Description,
-                model.Img, model.Year, dealersServices.IdByUser(this.User.Id()));
+            List<Image> images = new List<Image>();
+            foreach (var img in model.Imgs)
+            {
+                var memoryStream = new MemoryStream();
+                img.CopyToAsync(memoryStream);
+                images.Add(new Image
+                {
+                    Binary = memoryStream.ToArray(),
 
-            return this.Redirect("/");
-            //    return RedirectToAction(nameof(Details), new { id = id });
+                });
+            }
+
+
+            int id = this.camerasServices.Create(model.Brand, model.ModelCamera, model.Price, model.Description,
+                images, model.Year, dealersServices.IdByUser(this.User.Id()),dealersServices.GetDealer(this.User.Id()));
+
+             return RedirectToAction(nameof(Details), new { id = id });
+        }
+
+        public IActionResult GetImage(int id)
+        {
+            var image = imageService.GetImage(id);
+            return File(image.Binary , "image/png");
         }
 
         public IActionResult Details(int id)
         {
-            return this.View();
+            var camera = camerasServices.Details(id);
+            return this.View(camera);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Photo.Models.Dealers;
+﻿using Microsoft.Build.Framework;
+
+namespace Photo.Models.Dealers;
 
 public class DealersFormModel
 {

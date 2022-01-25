@@ -1,4 +1,5 @@
-﻿using Photo.Models.Cameras;
+﻿using Photo.Model;
+using Photo.Models.Cameras;
 using Photo.Services.Cameras.Models;
 
 namespace Photo.Services.Cameras;
@@ -17,7 +18,6 @@ public interface ICamerasServices
 
     IEnumerable<string> AllBrands();
 
-    int Create(string brand, string model, decimal price, string description, string imageUrl, int year, int dealerId);
+    int Create(string brand, string model, decimal price, string description, List<Image> imagesUrl, int year, int dealerId, Dealer dealer);
 
-    bool Edit(int id, string brand, string model, decimal price, string description, string imageUrl, int year, double rating);
 }

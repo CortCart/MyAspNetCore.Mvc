@@ -1,6 +1,6 @@
 using Photo;
 
-namespace CarRentingSystem
+namespace Photo
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;

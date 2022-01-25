@@ -13,14 +13,10 @@ public class AdsService:IAdsServices
     {
         this._context = context;
     }
-    public AdsQueryServiceModel All(string searchTerm = null, int currentPage = 1, int adsPerPage = Int32.MaxValue,
-        bool publicOnly = true)
+    public AdsQueryServiceModel All(string searchTerm = null, int currentPage = 1, int adsPerPage = Int32.MaxValue, bool publicOnly = true)
     {
         var adsQuery = this._context.Ads
             .Where(c => c.Public);
-
-        // Where(c => c.Brand == brand);
-        //.Where(c => !publicOnly || c.IsPublic);
 
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {

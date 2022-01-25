@@ -16,6 +16,11 @@ public class DealerService:IDealerService
         return _context.Dealers.Any(x => x.UserId == userId);
     }
 
+    public Dealer GetDealer(string userId)
+    {
+        return _context.Dealers.FirstOrDefault(x => x.UserId == userId);
+    }
+
     public int IdByUser(string userId)
     {
         return _context.Dealers.FirstOrDefault(x => x.UserId == userId).Id;

@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using System.Net.Mime;
+using AutoMapper.QueryableExtensions;
 using Photo.Data;
 using Photo.Model;
 
@@ -62,7 +63,7 @@ public class CamerasService : ICamerasServices
         {
             TotalCameras = totalCameras,
             CurrentPage = currentPage,
-            CarsPerPage = camerasPerPage,
+            CamerasPerPage = camerasPerPage,
             Cameras = cameras
         };
     }
@@ -84,8 +85,7 @@ public class CamerasService : ICamerasServices
                 Brand = x.Brand,
                 ModelCamera = x.Model,
                 Price = x.Price,
-                Rating = x.Rating,
-                Img = x.Img,
+                Imgs = x.Imgs,
                 Description = x.Description,
                 DealerId = x.DealerId,
                 DealerName = x.Dealer.Name,
@@ -93,54 +93,37 @@ public class CamerasService : ICamerasServices
             .FirstOrDefault();
     }
 
-    public int Create(string brand, string modelCamera, decimal price, string description, string imageUrl, int year, int dealerId)
+    public int Create(string brand, string modelCamera, decimal price, string description, List<Image> imagesUrl, int year, int dealerId, Dealer dealer)
     {
         var camera = new Camera()
         {
             Brand = brand,
             Model = modelCamera,
             Price = price,
-            Rating = 0,
+            DealerId = dealerId,
             Year = year,
-            Img = imageUrl,
-            Description = description,
-            DealerId = dealerId
+            Imgs = imagesUrl,
+            Description = description
         };
-
         _context.Cameras.Add(camera);
         _context.SaveChanges();
         return camera.Id;
     }
 
-    public bool Edit(int id, string brand, string model, decimal price, string description, string imageUrl, int year, double rating)
-    {
-        var camera = _context.Cameras.Find(id);
 
-        if (camera == null)
-        {
-            return false;
-        }
 
-        camera.Brand = brand;
-        camera.Model = model;
-        camera.Price = price;
-        camera.Rating = rating;
-        camera.Year = year;
-        camera.Img = imageUrl;
-        camera.Description = description;
-        _context.SaveChanges();
-        return true;
-    }
+    
     private IEnumerable<CamerasServiceModel> GetCameras(IQueryable<Camera> cameraQuery)
         => cameraQuery
             .Select(x => new CamerasServiceModel
             {
                 Id = x.Id,
                 Brand = x.Brand,
-                Img = x.Img,
+                Imgs = x.Imgs,
                 ModelCamera = x.Model,
                 Price = x.Price,
-                Descripton = x.Description,
-                Rating = x.Rating
+                Descripton = x.Description
             }).ToList();
+
+    
 }

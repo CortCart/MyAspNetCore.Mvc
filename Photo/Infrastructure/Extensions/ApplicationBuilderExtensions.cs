@@ -28,7 +28,6 @@ namespace Photo.Infrastructure.Extensions
             return app;
         }
 
-        //must fix
         private static void MigrateDatabase(IServiceProvider services)
         {
             var data = services.GetRequiredService<ApplicationDbContext>();

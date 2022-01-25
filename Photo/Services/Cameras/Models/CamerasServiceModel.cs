@@ -1,4 +1,6 @@
-﻿namespace Photo.Services.Cameras.Models;
+﻿using Photo.Model;
+
+namespace Photo.Services.Cameras.Models;
 
 public class CamerasServiceModel
 {
@@ -9,7 +11,7 @@ public class CamerasServiceModel
 
     public decimal Price { get; set; }
 
-    public string Img { get; set; }
+    public List<Image> Imgs { get; set; }
 
     public double Rating { get; set; }
 

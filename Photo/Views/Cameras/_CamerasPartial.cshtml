@@ -8,7 +8,7 @@
         {
             <div class="col-md-4">
                 <div class="card mb-3">
-                    <img class="card-img-top" src="@camera.Img" >
+                    <img class="card-img-top" src="@camera.Imgs.FirstOrDefault()" >
                     <div class="card-body text-center">
                         <h5 class="card-title text-center">@camera.Brand- @camera.ModelCamera </h5>
                         <a asp-controller="Cameras" asp-action="Details" asp-route-id="@camera.Id"  class="btn btn-primary">View</a>

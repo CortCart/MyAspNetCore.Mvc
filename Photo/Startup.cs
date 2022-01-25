@@ -1,9 +1,11 @@
+using Photo.Controllers;
 using Photo.Data;
 using Photo.Infrastructure.Extensions;
 using Photo.Model;
 using Photo.Services.Ads;
 using Photo.Services.Cameras;
 using Photo.Services.Dealers;
+using Photo.Services.Images;
 
 namespace Photo
 {
@@ -32,6 +34,7 @@ namespace Photo
             services.AddTransient<ICamerasServices,CamerasService>();
             services.AddTransient<IDealerService, DealerService>();
             services.AddTransient<IAdsServices, AdsService>();
+            services.AddTransient<IImageService, ImageService>();
             services.AddTransient<ApplicationDbContext>();
             // services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddScoped<DealerService>();
@@ -87,12 +90,12 @@ namespace Photo
                     endpoints.MapDefaultAreaRoute();
 
                     endpoints.MapControllerRoute(
-                        name: "Car Details",
-                        pattern: "/Cars/Details/{id}/{information}",
+                        name: "Camera Details",
+                        pattern: "/Cameras/Details/{id}",
                         defaults: new 
                         { 
-                           // controller = typeof(CarsController).GetControllerName(), 
-                            //action = nameof(CarsController.Details) 
+                            controller = typeof(CamerasController).GetControllerName(), 
+                            action = nameof(CamerasController.Details) 
                         });
 
                     endpoints.MapDefaultControllerRoute();

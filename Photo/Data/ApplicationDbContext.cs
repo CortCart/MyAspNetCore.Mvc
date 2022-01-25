@@ -14,6 +14,8 @@ namespace Photo.Data
         {
         }
 
+        public DbSet<Image> Images { get; set; }
+
         public DbSet<Photograph> Photographs { get; set; }
 
         public DbSet<Camera> Cameras { get; set; }
@@ -24,13 +26,26 @@ namespace Photo.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<Camera>()
-                .HasOne(c => c.Dealer)
-                .WithMany(c => c.Cameras)
-                .HasForeignKey(c => c.DealerId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .Entity<Camera>()
+            //    .HasOne(c => c.Dealer)
+            //    .WithMany(c => c.Cameras)
+            //    .HasForeignKey(c => c.DealerId)
+                //.OnDelete(DeleteBehavior.Restrict);
 
+            //builder
+            //    .Entity<Dealer>()
+            //    .HasMany(c => c.Cameras)
+            //    .WithOne(c => c.Dealer)
+            //    .HasForeignKey(c => c.DealerId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Image>()
+                .HasOne(c => c.Camera)
+                .WithMany(c => c.Imgs)
+                .HasForeignKey(c => c.CameraId)
+                .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(builder);
         }
     }

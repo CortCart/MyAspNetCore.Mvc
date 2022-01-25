@@ -4,7 +4,7 @@ public class CamerasQueryServiceModel
 {
     public int CurrentPage { get; set; }
 
-    public int CarsPerPage { get; set; }
+    public int CamerasPerPage { get; set; }
 
     public int TotalCameras { get; set; }
 
